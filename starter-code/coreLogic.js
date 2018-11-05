@@ -6,6 +6,7 @@ function CoreLogic() {
   this.timeCrono = 60;
   this.background = new Background(this);
   this.player = new Player(this);
+  this.obstaclesDown = new Obstacles(this);
   this.intervalID = null;
   this.reset();
 }
@@ -23,12 +24,14 @@ CoreLogic.prototype.stop = function() {
 CoreLogic.prototype.draw = function() {
 this.background.draw();
 this.player.draw();
+this.obstaclesDown.draw();
 // this.cronoDraw();
 }
 
 CoreLogic.prototype.moveAll = function() {
   this.background.move();
   this.player.move();
+  this.obstaclesDown.move();
 }
 
 CoreLogic.prototype.init = function() {

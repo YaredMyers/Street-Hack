@@ -5,8 +5,8 @@ function Background(game) {
   this.ctx = game.ctx;
   this.x = 0;
   this.y = 0;
-   this.width = 700;
-   this.height = 400;
+  this.width = 700;
+  this.height = 400;
   this.dx = 6;
 }
 

@@ -1,6 +1,6 @@
 window.onload = function() {
   document.getElementById("start-button").onclick = function(e) {
-  //document.activeElement.blur();
+  // document.activeElement.blur();
     startGame();
   };
 
