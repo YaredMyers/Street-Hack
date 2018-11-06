@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Satisfy');
 
 body {
-  background-image: url("./images/backgroundhtml/alterbackground.png");
+  background-image: url("./images/backgroundhtml/alterbackground2.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -74,13 +74,13 @@ li b {
   margin: 0 auto;
   max-width: 250px;
   text-align: center;
-  position: relative;
-  right: -535px;
-  bottom: 300px;
+  position: absolute;
+  right: 57px;
+  bottom: 357px;
 }
 
 .gameNote b {
-  color: white;
+  color: lightpink;
 }
 
 .post {

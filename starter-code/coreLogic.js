@@ -59,8 +59,6 @@ CoreLogic.prototype.clear = function() {
 
 CoreLogic.prototype.generateObstacle = function() {
   this.obstacles.push(new Obstacles(this, obsLoad[obsTotal[Math.floor(Math.random() * obsCount)]]));
-  // this.obstacles.push(new Obstacles(this, obsLoad["fireFont"]));
-
 };
 
 // CoreLogic.prototype.generateItem = function() { //////ATENCION!!!!!
@@ -76,12 +74,12 @@ CoreLogic.prototype.clearObstacles = function() {
 CoreLogic.prototype.obsColision = function() {
   this.obstacles.forEach(function(obs) {
   if(this.player.x + this.player.width >= obs.x  && obs.x + obs.width >= this.player.x &&
-    this.player.y + obs.height >= obs.y && obs.y + obs.height >= this.player.y && !this.player.pepe) {
+    this.player.y + obs.height >= obs.y && obs.y + obs.height >= this.player.y && !this.player.inmortal) {
       this.player.health--;
-      console.log(this.player.pepe)
-      this.player.pepe = true;
+      console.log(true)
+      this.player.inmortal = true;
       setTimeout(function(){
-        this.player.pepe = false;
+        this.player.inmortal = false;
       }.bind(this), 500)
     }
 

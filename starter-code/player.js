@@ -8,7 +8,7 @@ function Player(game) {
   this.imgUp = new Image();
   this.imgUp.src = "./starter-code/images/player/sakup.png";
   this.imgDown = new Image();
-  this.imgDown.src = "./starter-code/images/player/sakdown2.png";
+  this.imgDown.src = "./starter-code/images/player/sakdownalt.png";
   this.framesX = 3;
   this.framesY = 2;
   this.frameIndexX = 0;
@@ -20,11 +20,10 @@ function Player(game) {
   this.vx = 1;
   this.vy = 1;
   this.health = 3;
-
   this.run = true;
   this.jump = false;
   this.down = false;
-  this.pepe = false;
+  this.inmortal = false;
   this.setListeners();
 }
 
@@ -92,9 +91,9 @@ Player.prototype.drawDown = function() {
   this.game.ctx.drawImage(
   this.imgDown,
   this.x,
-  310,
-  75,
-  100,
+  315,
+  75,      //290-75-100 en cascada
+  70,
   );
 }
 
