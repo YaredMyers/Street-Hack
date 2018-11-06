@@ -1,4 +1,4 @@
-function Obstacles(game) {
+function Obstacles(game, img) {
   this.game = game;
   this.imgObsDown = new Image();
   this.imgObsDown.src = "./starter-code/images/obstacles/firefont.png";
