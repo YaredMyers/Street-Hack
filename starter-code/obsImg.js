@@ -1,61 +1,62 @@
 var imgObstacles = {
   bat: {
     name: "bat",
-    width: 70,
-    height: 40,
-    y: 250,
+    w: 70,
+    h: 40,
+    y0: 250,
+    dx:
     src:"./starter-code/images/obstacles/flybat.png"
   },
   dalshim: {
     name: "dalshim",
-    width: 140,
-    height: 100,
-    y: 205,
+    w: 140,
+    h: 100,
+    y0: 205,
     src:"./starter-code/images/obstacles/dalshimfly.png"
   },
   jumpingNinja: {
     name: "jumpingNinja",
-    width: 120,
-    height: 80,
-    y: 220,
+    w: 120,
+    h: 80,
+    y0: 220,
     src:"./starter-code/images/obstacles/ninja.png"
   },
   ninjaCat: {
     name: "ninjaCat",
-    width: 90,
-    height: 50,
-    y: 335,
+    w: 90,
+    h: 50,
+    y0: 335,
     src:"./starter-code/images/obstacles/ninjacat.png"
   },
   johnDoe: {
     name: "johnDoe",
-    width: 45,
-    height: 85,
-    y: 300,
+    w: 45,
+    h: 85,
+    y0: 300,
     src:"./starter-code/images/obstacles/ugly.png"
   },
   fireFont: {
     name: "fireFont",
-    width: 50,
-    height: 70,
-    y: 310,
-    src:"./starter-code/images/obstacles/flybat.png"
+    w: 50,
+    h: 70,
+    y0: 310,
+    src:"./starter-code/images/obstacles/firefont.png"
   },
 }
 
   var obsLoad = {};
   var obsCount = 0;
-  var obsTotal = Object.keys(imgObstacles).length;
+  var obsTotal = Object.keys(imgObstacles);
 
   Object.keys(imgObstacles).forEach(function(e) {
     var image = new Image();
 
-  Object.keys(obj[e]).forEach(function(y){
+  Object.keys(imgObstacles[e]).forEach(function(y){
     image[y] = imgObstacles[e][y];
     image.onload = function(){
       obsCount++;
 
-    if(obsCount === obsTotal) {
+    if(obsCount === obsTotal.length) {
       console.log(obsLoad);
     }
   }

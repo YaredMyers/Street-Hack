@@ -14,7 +14,9 @@ function Items(game, img) {
 }
 
 Items.prototype.draw = function() {
-
+  this.game.ctx.drawImage(this.item1, this.x, this.y, this.width, this.height);
+  // this.game.ctx.drawImage(this.imgObsDown, this.x, this.y, this.width, this.height);
+  // this.game.ctx.drawImage(this.imgObsDown, this.x, this.y, this.width, this.height);
 }
 
 Items.prototype.move = function() {

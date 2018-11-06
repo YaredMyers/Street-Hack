@@ -13,6 +13,7 @@ function CoreLogic() {
 CoreLogic.prototype.reset = function() {
   this.framesCount = 0;
   this.obstacles = [];
+  // this.items = [];
   this.score = 0;
 }
 
@@ -24,8 +25,8 @@ CoreLogic.prototype.draw = function() {
   this.background.draw();
   this.player.draw();
   this.obstacles.forEach(function(obs){
-      obs.draw();
-    })
+    obs.draw();
+  })
 // this.cronoDraw();
 }
 
@@ -42,7 +43,7 @@ CoreLogic.prototype.init = function() {
   this.moveAll();
   this.draw();
   this.obsColision();
-  if (this.framesCount % 100 === 0) {
+  if (this.framesCount % 70 === 0) {
     this.generateObstacle();
   }
   if(this.framesCount == 1000){
@@ -57,14 +58,18 @@ CoreLogic.prototype.clear = function() {
 }; 
 
 CoreLogic.prototype.generateObstacle = function() {
-  this.obstacles.push(new Obstacles(this));
+  this.obstacles.push(new Obstacles(this, obsLoad[obsTotal[Math.floor(Math.random() * obsCount)]]));
 };
 
-CoreLogic.prototype.clearObstacles = function() {
-  this.obstacles = this.obstacles.filter(function(obstacle) {
-    return obstacle.x >= 0;
-  });
-};
+// CoreLogic.prototype.generateItem = function() { //////ATENCION!!!!!
+//   this.items.push(new Items(this));
+// };
+
+// CoreLogic.prototype.clearObstacles = function() {
+//   this.obstacles = this.obstacles.filter(function(obstacle) {
+//     return obstacle.x >= 0;
+//   });
+// };
 
 CoreLogic.prototype.obsColision = function() {
   this.obstacles.forEach(function(obs) {
@@ -77,6 +82,18 @@ CoreLogic.prototype.obsColision = function() {
     }
   }.bind(this))
 };
+
+// CoreLogic.prototype.itsColision = function() {
+//   this.items.forEach(function(its) {
+//     if(this.player.x + this.player.width >= its.x  && its.x + its.width >= this.player.x &&
+//       this.player.y + its.height >= its.y && its.y + its.height >= this.player.y) {
+//         return true;
+//       } else {
+//         console.log(false);
+//          false;
+//       }
+//     }.bind(this))
+// };
 
 // CoreLogic.prototype.gameOver = function() {
 //   this.stop();

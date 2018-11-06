@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Satisfy');
 
 body {
-  background-image: url("/Users/yaredmyers/Documents/IronHack/lab/proyect1-videogame-Street-Hack/starter-code/images/backgroundhtml/alterbackground.png");
+  background-image: url("./images/backgroundhtml/alterbackground.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -41,7 +41,7 @@ li b {
 
 #myCanvas {
   border: 1px solid black;
-  background-image: url(/Users/yaredmyers/Documents/IronHack/lab/proyect1-videogame-Street-Hack/starter-code/images/backgroundhtml/title.jpg);
+  background-image: url("./images/backgroundhtml/title.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
