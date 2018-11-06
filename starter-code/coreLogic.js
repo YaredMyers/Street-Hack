@@ -38,7 +38,7 @@ CoreLogic.prototype.init = function() {
   this.intervalID = setInterval(function (){
   this.moveAll();
   this.draw();
-  this.framesCount++
+  this.framesCount++;
     // this.bgm();
   }.bind(this), 1000/this.fps);
 };
@@ -58,7 +58,7 @@ CoreLogic.prototype.clearObstacles = function() {
 };
 
 CoreLogic.prototype.obsColision = function() {
-  if( player.x + player.width >= obstacles.x  && obstacles.x + obstacles.width >= player.x &&
+  if(player.x + player.width >= obstacles.x  && obstacles.x + obstacles.width >= player.x &&
     player.y + obstacles.height >= obstacles.y && obstacles.y + obstacles.height >= player.y) {
       console.log(true);
     } else {
