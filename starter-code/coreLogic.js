@@ -6,7 +6,6 @@ function CoreLogic() {
   this.timeCrono = 60;
   this.background = new Background(this);
   this.player = new Player(this);
-  this.obstaclesDown = new Obstacles(this);
   this.intervalID = null;
   this.reset();
 }
@@ -24,22 +23,32 @@ CoreLogic.prototype.stop = function() {
 CoreLogic.prototype.draw = function() {
   this.background.draw();
   this.player.draw();
-  this.obstaclesDown.draw();
+  this.obstacles.forEach(function(obs){
+      obs.draw();
+    })
 // this.cronoDraw();
 }
 
 CoreLogic.prototype.moveAll = function() {
   this.background.move();
   this.player.move();
-  this.obstaclesDown.move();
+  this.obstacles.forEach(function(obs){
+    obs.move();
+  });
 }
 
 CoreLogic.prototype.init = function() {
   this.intervalID = setInterval(function (){
   this.moveAll();
   this.draw();
+  this.obsColision();
+  if (this.framesCount % 100 === 0) {
+    this.generateObstacle();
+  }
+  if(this.framesCount == 1000){
+    this.framesCount=0;
+  }
   this.framesCount++;
-    // this.bgm();
   }.bind(this), 1000/this.fps);
 };
 
@@ -48,7 +57,7 @@ CoreLogic.prototype.clear = function() {
 }; 
 
 CoreLogic.prototype.generateObstacle = function() {
-  this.obstacles.push(new Obstacle(this));
+  this.obstacles.push(new Obstacles(this));
 };
 
 CoreLogic.prototype.clearObstacles = function() {
@@ -58,13 +67,22 @@ CoreLogic.prototype.clearObstacles = function() {
 };
 
 CoreLogic.prototype.obsColision = function() {
-  if(player.x + player.width >= obstacles.x  && obstacles.x + obstacles.width >= player.x &&
-    player.y + obstacles.height >= obstacles.y && obstacles.y + obstacles.height >= player.y) {
+  this.obstacles.forEach(function(obs) {
+  if(this.player.x + this.player.width >= obs.x  && obs.x + obs.width >= this.player.x &&
+    this.player.y + obs.height >= obs.y && obs.y + obs.height >= this.player.y) {
       console.log(true);
     } else {
       return false;
     }
-}
+  }.bind(this))
+};
+
+// CoreLogic.prototype.gameOver = function() {
+//   this.stop();
+  
+//   if(confirm("you have not arrived to deliver the DE :(")) {
+//     this.reset();
+//     this.init();
 
 
 // CoreLogic.prototype.cronoDraw = function() {

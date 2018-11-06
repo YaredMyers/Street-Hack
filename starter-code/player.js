@@ -19,6 +19,7 @@ function Player(game) {
   this.upheight = 150;
   this.vx = 1;
   this.vy = 1;
+  this.health = 3;
 
   this.run = true;
   this.jump = false;
