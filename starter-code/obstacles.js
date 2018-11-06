@@ -20,3 +20,5 @@ Obstacles.prototype.draw = function() {
 Obstacles.prototype.move = function() {
   this.x -= this.dx;
 }
+
+

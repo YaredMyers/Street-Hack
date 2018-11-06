@@ -22,9 +22,9 @@ CoreLogic.prototype.stop = function() {
 }
 
 CoreLogic.prototype.draw = function() {
-this.background.draw();
-this.player.draw();
-this.obstaclesDown.draw();
+  this.background.draw();
+  this.player.draw();
+  this.obstaclesDown.draw();
 // this.cronoDraw();
 }
 
@@ -36,9 +36,9 @@ CoreLogic.prototype.moveAll = function() {
 
 CoreLogic.prototype.init = function() {
   this.intervalID = setInterval(function (){
-    this.moveAll();
-    this.draw();
-    this.framesCount++
+  this.moveAll();
+  this.draw();
+  this.framesCount++
     // this.bgm();
   }.bind(this), 1000/this.fps);
 };
@@ -46,6 +46,25 @@ CoreLogic.prototype.init = function() {
 CoreLogic.prototype.clear = function() {
   this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 }; 
+
+CoreLogic.prototype.generateObstacle = function() {
+  this.obstacles.push(new Obstacle(this));
+};
+
+CoreLogic.prototype.clearObstacles = function() {
+  this.obstacles = this.obstacles.filter(function(obstacle) {
+    return obstacle.x >= 0;
+  });
+};
+
+CoreLogic.prototype.obsColision = function() {
+  if( player.x + player.width >= obstacles.x  && obstacles.x + obstacles.width >= player.x &&
+    player.y + obstacles.height >= obstacles.y && obstacles.y + obstacles.height >= player.y) {
+      console.log(true);
+    } else {
+      return false;
+    }
+}
 
 
 // CoreLogic.prototype.cronoDraw = function() {
