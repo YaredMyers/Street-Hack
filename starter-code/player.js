@@ -46,7 +46,7 @@ Player.prototype.setListeners = function() {
       setTimeout(function(){
       this.down = false;
       this.run = true;
-      }.bind(this), 1000);      
+      }.bind(this), 700);      
     }
   }.bind(this);
 }

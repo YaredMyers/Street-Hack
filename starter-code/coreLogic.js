@@ -75,7 +75,7 @@ CoreLogic.prototype.obsColision = function() {
   this.obstacles.forEach(function(obs) {
   if(this.player.x + this.player.width >= obs.x  && obs.x + obs.width >= this.player.x &&
     this.player.y + obs.height >= obs.y && obs.y + obs.height >= this.player.y) {
-      return true;
+      console.log(true);
     } else {
       console.log(false);
        false;

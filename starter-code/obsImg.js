@@ -4,7 +4,7 @@ var imgObstacles = {
     w: 70,
     h: 40,
     y0: 250,
-    dx:
+    dx: 5,
     src:"./starter-code/images/obstacles/flybat.png"
   },
   dalshim: {
@@ -12,6 +12,7 @@ var imgObstacles = {
     w: 140,
     h: 100,
     y0: 205,
+    dx: 7,
     src:"./starter-code/images/obstacles/dalshimfly.png"
   },
   jumpingNinja: {
@@ -19,6 +20,7 @@ var imgObstacles = {
     w: 120,
     h: 80,
     y0: 220,
+    dx: 7,
     src:"./starter-code/images/obstacles/ninja.png"
   },
   ninjaCat: {
@@ -26,6 +28,7 @@ var imgObstacles = {
     w: 90,
     h: 50,
     y0: 335,
+    dx: 7,
     src:"./starter-code/images/obstacles/ninjacat.png"
   },
   johnDoe: {
@@ -33,6 +36,7 @@ var imgObstacles = {
     w: 45,
     h: 85,
     y0: 300,
+    dx: 7,
     src:"./starter-code/images/obstacles/ugly.png"
   },
   fireFont: {
@@ -40,6 +44,7 @@ var imgObstacles = {
     w: 50,
     h: 70,
     y0: 310,
+    dx: 6,
     src:"./starter-code/images/obstacles/firefont.png"
   },
 }

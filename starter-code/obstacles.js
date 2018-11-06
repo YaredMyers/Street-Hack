@@ -5,7 +5,7 @@ function Obstacles(game, img) {
   this.height = img.h;
   this.x = this.game.canvas.width;
   this.y = img.y0;
-  this.dx = 5; 
+  this.dx = img.dx; 
 }
 
 Obstacles.prototype.draw = function() {
