@@ -24,7 +24,7 @@ function Player(game) {
   this.run = true;
   this.jump = false;
   this.down = false;
-
+  this.pepe = false;
   this.setListeners();
 }
 
@@ -39,13 +39,14 @@ Player.prototype.setListeners = function() {
       this.run = false;
       this.jump = true;
     } else if (event.keyCode === DOWN_KEY  && this.down == false && this.y == this.y0) {
-      this.y += 3;
+      this.y = 300;
       this.vx += 10;
       this.run = false;
       this.down = true;
       setTimeout(function(){
-      this.down = false;
-      this.run = true;
+        this.down = false;
+        this.run = true;
+        this.y = this.y0;
       }.bind(this), 700);      
     }
   }.bind(this);

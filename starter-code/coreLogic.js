@@ -17,9 +17,9 @@ CoreLogic.prototype.reset = function() {
   this.score = 0;
 }
 
-CoreLogic.prototype.stop = function() {
-  clearInterval(this.intervalID);
-}
+// CoreLogic.prototype.stop = function() {
+//   clearInterval(this.intervalID);
+// }
 
 CoreLogic.prototype.draw = function() {
   this.background.draw();
@@ -58,28 +58,38 @@ CoreLogic.prototype.clear = function() {
 }; 
 
 CoreLogic.prototype.generateObstacle = function() {
-  this.obstacles.push(new Obstacles(this, obsLoad[obsTotal[Math.floor(Math.random() * obsCount)]]));
+  // this.obstacles.push(new Obstacles(this, obsLoad[obsTotal[Math.floor(Math.random() * obsCount)]]));
+  this.obstacles.push(new Obstacles(this, obsLoad["fireFont"]));
+
 };
 
 // CoreLogic.prototype.generateItem = function() { //////ATENCION!!!!!
 //   this.items.push(new Items(this));
 // };
 
-// CoreLogic.prototype.clearObstacles = function() {
-//   this.obstacles = this.obstacles.filter(function(obstacle) {
-//     return obstacle.x >= 0;
-//   });
-// };
+CoreLogic.prototype.clearObstacles = function() {
+  this.obstacles = this.obstacles.filter(function(obstacle) {
+    return obstacle.x >= 0;
+  });
+};
 
 CoreLogic.prototype.obsColision = function() {
   this.obstacles.forEach(function(obs) {
   if(this.player.x + this.player.width >= obs.x  && obs.x + obs.width >= this.player.x &&
-    this.player.y + obs.height >= obs.y && obs.y + obs.height >= this.player.y) {
-      console.log(true);
-    } else {
-      console.log(false);
-       false;
+    this.player.y + obs.height >= obs.y && obs.y + obs.height >= this.player.y && !this.player.pepe) {
+      this.player.health--;
+      console.log(this.player.pepe)
+      this.player.pepe = true;
+      setTimeout(function(){
+        this.player.pepe = false;
+      }.bind(this), 500)
     }
+
+    if (this.player.health === 0) {
+      // debugger
+      alert("HULIO!");
+    }
+
   }.bind(this))
 };
 
@@ -124,5 +134,14 @@ CoreLogic.prototype.obsColision = function() {
 //       alert("You loose! :(");
 //     }
 //   }.bind(this), 60000);
+// }
+
+
+// this.player.health--;
+
+
+
+// if (this.player.health === 0) {
+//   this.gameOver();
 // }
 
