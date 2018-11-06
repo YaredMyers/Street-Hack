@@ -92,4 +92,20 @@ CoreLogic.prototype.obsColision = function() {
 //   this.ctx.fillText(this.crono, 550, 100)
 // }
 
+// CoreLogic.prototype.cronom = function () {
+//   this.cronominterval = setInterval(function () {
+//     this.timeCrono--;
+//   }.bind(this), 1000)
+// }
+
+// CoreLogic.prototype.time = function () {
+//   setTimeout(function () {
+//     clearInterval(this.cronominterval)
+//     if (this.player.points > 15){
+//       alert("You win! :)");
+//     } else {
+//       alert("You loose! :(");
+//     }
+//   }.bind(this), 60000);
+// }
 

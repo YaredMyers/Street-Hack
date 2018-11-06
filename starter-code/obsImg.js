@@ -45,23 +45,23 @@ var imgObstacles = {
 
   var obsLoad = {};
   var obsCount = 0;
-  var obsTotal = Object.keys(obstacles).length;
+  var obsTotal = Object.keys(imgObstacles).length;
 
-  Object.keys(obstacles).forEach(function(e){
+  Object.keys(imgObstacles).forEach(function(e) {
     var image = new Image();
 
   Object.keys(obj[e]).forEach(function(y){
-    image[y] = obstacles[e][y];
+    image[y] = imgObstacles[e][y];
     image.onload = function(){
       obsCount++;
 
-      if(obsCount === obsTotal) {
-        console.log(obsLoad);
-      }
+    if(obsCount === obsTotal) {
+      console.log(obsLoad);
     }
-  })
+  }
+})
   obsLoad[e] = image;
-  })
+});
 
 
 
