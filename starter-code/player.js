@@ -8,7 +8,7 @@ function Player(game) {
   this.imgUp = new Image();
   this.imgUp.src = "./starter-code/images/player/sakup.png";
   this.imgDown = new Image();
-  this.imgDown.src = "./starter-code/images/player/sakdown.png";
+  this.imgDown.src = "./starter-code/images/player/sakdown2.png";
   this.framesX = 3;
   this.framesY = 2;
   this.frameIndexX = 0;
@@ -92,7 +92,7 @@ Player.prototype.drawDown = function() {
   this.game.ctx.drawImage(
   this.imgDown,
   this.x,
-  290,
+  310,
   75,
   100,
   );

@@ -58,8 +58,8 @@ CoreLogic.prototype.clear = function() {
 }; 
 
 CoreLogic.prototype.generateObstacle = function() {
-  // this.obstacles.push(new Obstacles(this, obsLoad[obsTotal[Math.floor(Math.random() * obsCount)]]));
-  this.obstacles.push(new Obstacles(this, obsLoad["fireFont"]));
+  this.obstacles.push(new Obstacles(this, obsLoad[obsTotal[Math.floor(Math.random() * obsCount)]]));
+  // this.obstacles.push(new Obstacles(this, obsLoad["fireFont"]));
 
 };
 
@@ -86,8 +86,7 @@ CoreLogic.prototype.obsColision = function() {
     }
 
     if (this.player.health === 0) {
-      // debugger
-      alert("HULIO!");
+      // alert("HULIO!");
     }
 
   }.bind(this))
