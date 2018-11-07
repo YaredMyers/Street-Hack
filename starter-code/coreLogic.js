@@ -18,7 +18,7 @@ CoreLogic.prototype.reset = function() {
   this.items = [];
   this.timeCrono = 60;
   this.score = 0;
-  this.items.push(new Items(this, itsLoad["item1"]));
+  // this.items.push(new Items(this, itsLoad["item1"]));
 
 }
 
@@ -57,7 +57,7 @@ CoreLogic.prototype.init = function() {
 
   this.obsColision();
   if (this.framesCount % 70 === 0) {
-    // this.generateObstacle();
+    this.generateObstacle();
   }
   if(this.framesCount == 1000){
     this.framesCount = 0;
@@ -80,8 +80,8 @@ CoreLogic.prototype.generateObstacle = function() {
   this.obstacles.push(new Obstacles(this, obsLoad[obsTotal[Math.floor(Math.random() * obsCount)]])); };
 
 CoreLogic.prototype.generateItem = function() { //////ATENCION!!!!!
-  // this.items.push(new Items(this, itsLoad[itsTotal[Math.floor(Math.random() * itsCount)]]));
-  this.items.push(new Items(this, itsLoad["item1"]));
+  this.items.push(new Items(this, itsLoad[itsTotal[Math.floor(Math.random() * itsCount)]]));
+  // this.items.push(new Items(this, itsLoad["item1"]));
 
 };
 
@@ -102,6 +102,7 @@ CoreLogic.prototype.obsColision = function() {
   if(this.player.x + this.player.width >= obs.x  && obs.x + obs.width >= this.player.x &&
     this.player.y + obs.height >= obs.y && obs.y + obs.height >= this.player.y && !this.player.inmortal) {
       this.player.lifePoints--;
+      console.log("pepe");
       
       this.player.inmortal = true;      
       setTimeout(function(){
@@ -117,13 +118,12 @@ CoreLogic.prototype.obsColision = function() {
 
 CoreLogic.prototype.itsColision = function() {
   this.items.forEach(function(its) {
-    console.log(its, this.player)
-    if(this.player.x + this.player.w <= its.x &&
-        its.x + its.w >= this.player.x && 
-        this.player.y + this.player.h >= its.y &&
-        its.y + its.h >= this.player.y) {
+    if(this.player.x + this.player.width - 20 >= its.x &&
+        its.x + its.width >= this.player.x + 15&& 
+        this.player.y + this.player.height - 15>= its.y &&
+        its.y + its.height >= this.player.y) {
         this.score++;
-        console.log(this.player.lifePoints);
+        console.log(its.y, this.player.y + this.player.height);
 
      }
     }.bind(this))
