@@ -9,6 +9,7 @@ window.onload = function() {
 var coreLogic = new CoreLogic();
 
 function startGame() {
+document.getElementById("start-button").disabled = true;
 coreLogic.init();
 }
 
