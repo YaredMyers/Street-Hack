@@ -6,20 +6,20 @@ function Hearts(game) {
   this.h = 50;
   this.imgHeart = new Image();
   this.imgHeart.src = "./starter-code/images/items/heart-transparent-video-game-6.png";
-  this.lifePoints = 3;
+  this.lifePoints = this.game.player.lifePoints;
 }
 
 Hearts.prototype.draw = function() {
-  var x = 0;
-  for (i = 0; i < this.lifePoints; i++) {
+  var x = this.x;
+  for (i = 0; i < this.game.player.lifePoints; i++) {
     this.game.ctx.drawImage(
       this.imgHeart,
-      this.x,
+      x,
       this.y,
       this.w,
       this.h,
     );
-    x += this.w;
+    x -= this.w;
   }
 }
 
