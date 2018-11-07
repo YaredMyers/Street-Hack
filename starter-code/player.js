@@ -19,6 +19,7 @@ function Player(game) {
   this.upheight = 150;
   this.vx = 1;
   this.vy = 1;
+  this.lifePoints = 3;
   this.run = true;
   this.jump = false;
   this.down = false;
@@ -92,7 +93,7 @@ Player.prototype.drawDown = function() {
   this.imgDown,
   this.x,
   315,
-  75,      //290-75-100 en cascada
+  75,
   70,
   );
 }

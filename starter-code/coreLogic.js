@@ -7,6 +7,7 @@ function CoreLogic() {
   this.background = new Background(this);
   this.player = new Player(this);
   // this.hearts = new Hearts(this);
+  this.score = 0;
   this.intervalID = null;
   this.reset();
 }
@@ -50,6 +51,7 @@ CoreLogic.prototype.init = function() {
   this.intervalID = setInterval(function (){
   this.moveAll();
   this.draw();
+
   this.obsColision();
   if (this.framesCount % 70 === 0) {
     this.generateObstacle();
@@ -58,8 +60,14 @@ CoreLogic.prototype.init = function() {
     this.framesCount = 0;
   }
   this.framesCount++;
+
+  this.itsColision();
+  if(this.framesCount % 50 === 0) {
+    this.generateItem();
+  }
   }.bind(this), 1000/this.fps);
-};
+
+  }
 
 CoreLogic.prototype.clear = function() {
   this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -69,7 +77,8 @@ CoreLogic.prototype.generateObstacle = function() {
   this.obstacles.push(new Obstacles(this, obsLoad[obsTotal[Math.floor(Math.random() * obsCount)]])); };
 
 CoreLogic.prototype.generateItem = function() { //////ATENCION!!!!!
-  this.items.push(new Items(this, itsLoad[itsLoad[Math.floor(Math.random() * itsCount)]]));
+  this.items.push(new Items(this, itsLoad[itsTotal[Math.floor(Math.random() * itsCount)]]));
+  
 };
 
 CoreLogic.prototype.clearObstacles = function() {
@@ -78,38 +87,38 @@ CoreLogic.prototype.clearObstacles = function() {
   });
 };
 
+CoreLogic.prototype.clearItems = function() {
+  this.items = this.items.filter(function(item) {
+    return item.x >= 0;
+  });
+};
+
 CoreLogic.prototype.obsColision = function() {
   this.obstacles.forEach(function(obs) {
-    // console.log(this.player.y)
   if(this.player.x + this.player.width >= obs.x  && obs.x + obs.width >= this.player.x &&
     this.player.y + obs.height >= obs.y && obs.y + obs.height >= this.player.y && !this.player.inmortal) {
-      this.player.health--;
-      this.player.inmortal = true;
-      console.log(true);
-      
+      this.player.lifePoints--;
+      this.player.inmortal = true;      
       setTimeout(function(){
         this.player.inmortal = false;
       }.bind(this), 600)
     }
-
-    if (this.player.health === 0) {
-      // alert("HULIO!");
+    if (this.player.lifePoints === 0) {
+      // alert("luz! fuego! destruccion!");
     }
 
   }.bind(this))
 };
 
-// CoreLogic.prototype.itsColision = function() {
-//   this.items.forEach(function(its) {
-//     if(this.player.x + this.player.width >= its.x  && its.x + its.width >= this.player.x &&
-//       this.player.y + its.height >= its.y && its.y + its.height >= this.player.y) {
-//         return true;
-//       } else {
-//         console.log(false);
-//          false;
-//       }
-//     }.bind(this))
-// };
+CoreLogic.prototype.itsColision = function() {
+  this.items.forEach(function(its) {
+    if(this.player.x + this.player.width >= its.x  && its.x + its.width >= this.player.x &&
+      this.player.y + its.height >= its.y && its.y + its.height >= this.player.y) {
+        this.score++;
+        console.log(true);
+     }
+    }.bind(this))
+};
 
 // CoreLogic.prototype.gameOver = function() {
 //   this.stop();

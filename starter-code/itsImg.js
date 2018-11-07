@@ -1,27 +1,30 @@
 var imgItems = {
   item1: {
     name: "item1",
-    w: 40,
-    h: 20,
-    y0: 310,
+    w: 50,
+    h: 40,
+    y0: 340,
     dx: 6,
-    src:"./starter-code/images/items/sushi1.png"
+    scorePoint: 1,
+    src:"./starter-code/images/items/arroz.png"
   },
   sushiSp: {
     name: "sushiSp",
-    w: 40,
-    h: 20,
-    y0: 310,
-    dx: 6,
+    w: 60,
+    h: 45,
+    y0: 250,
+    dx: 5,
+    lifePoint: 1,
     src:"./starter-code/images/items/happysushi.png"
   },
-  jumpingNinja: {
-    name: "jumpingNinja",
-    w: 40,
-    h: 20,
-    y: 310,
+  item2: {
+    name: "item2",
+    w: 60,
+    h: 30,
+    y: 210,
     dx: 6,
-    src:"./starter-code/images/items/sushi3.png"
+    scorePoint: 1,
+    src:"./starter-code/images/items/food.png"
   },
 }
 
