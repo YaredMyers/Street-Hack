@@ -4,7 +4,7 @@ var imgObstacles = {
     w: 70,
     h: 40,
     y0: 250,
-    dx: 5,
+    dx: 7,
     src:"./starter-code/images/obstacles/flybat.png"
   },
   dalshim: {

@@ -6,6 +6,7 @@ function CoreLogic() {
   this.timeCrono = 60;
   this.background = new Background(this);
   this.player = new Player(this);
+  // this.hearts = new Hearts(this);
   this.intervalID = null;
   this.reset();
 }
@@ -13,7 +14,8 @@ function CoreLogic() {
 CoreLogic.prototype.reset = function() {
   this.framesCount = 0;
   this.obstacles = [];
-  // this.items = [];
+  this.items = [];
+  this.timeCrono = 60;
   this.score = 0;
 }
 
@@ -26,8 +28,11 @@ CoreLogic.prototype.draw = function() {
   this.player.draw();
   this.obstacles.forEach(function(obs){
     obs.draw();
-  })
-// this.cronoDraw();
+  });
+  this.items.forEach(function(its){
+    its.draw();
+  });
+  this.cronoDraw();
 }
 
 CoreLogic.prototype.moveAll = function() {
@@ -36,6 +41,9 @@ CoreLogic.prototype.moveAll = function() {
   this.obstacles.forEach(function(obs){
     obs.move();
   });
+  this.items.forEach(function(its) {
+    its.move();
+  })
 }
 
 CoreLogic.prototype.init = function() {
@@ -47,7 +55,7 @@ CoreLogic.prototype.init = function() {
     this.generateObstacle();
   }
   if(this.framesCount == 1000){
-    this.framesCount=0;
+    this.framesCount = 0;
   }
   this.framesCount++;
   }.bind(this), 1000/this.fps);
@@ -58,12 +66,11 @@ CoreLogic.prototype.clear = function() {
 }; 
 
 CoreLogic.prototype.generateObstacle = function() {
-  this.obstacles.push(new Obstacles(this, obsLoad[obsTotal[Math.floor(Math.random() * obsCount)]]));
-};
+  this.obstacles.push(new Obstacles(this, obsLoad[obsTotal[Math.floor(Math.random() * obsCount)]])); };
 
-// CoreLogic.prototype.generateItem = function() { //////ATENCION!!!!!
-//   this.items.push(new Items(this));
-// };
+CoreLogic.prototype.generateItem = function() { //////ATENCION!!!!!
+  this.items.push(new Items(this, itsLoad[itsLoad[Math.floor(Math.random() * itsCount)]]));
+};
 
 CoreLogic.prototype.clearObstacles = function() {
   this.obstacles = this.obstacles.filter(function(obstacle) {
@@ -73,14 +80,16 @@ CoreLogic.prototype.clearObstacles = function() {
 
 CoreLogic.prototype.obsColision = function() {
   this.obstacles.forEach(function(obs) {
+    // console.log(this.player.y)
   if(this.player.x + this.player.width >= obs.x  && obs.x + obs.width >= this.player.x &&
     this.player.y + obs.height >= obs.y && obs.y + obs.height >= this.player.y && !this.player.inmortal) {
       this.player.health--;
-      console.log(true)
       this.player.inmortal = true;
+      console.log(true);
+      
       setTimeout(function(){
         this.player.inmortal = false;
-      }.bind(this), 500)
+      }.bind(this), 600)
     }
 
     if (this.player.health === 0) {
@@ -110,35 +119,25 @@ CoreLogic.prototype.obsColision = function() {
 //     this.init();
 
 
-// CoreLogic.prototype.cronoDraw = function() {
-//   this.ctx.font = "100px Satisfy";
-//   this.ctx.fillStyle = "white";
-//   this.ctx.fillText(this.crono, 550, 100)
-// }
+CoreLogic.prototype.cronoDraw = function() {
+  this.ctx.font = "30px Sans Serif";
+  this.ctx.fillStyle = "black";
+  this.ctx.fillText(this.crono, 290, 30)
+}
 
-// CoreLogic.prototype.cronom = function () {
-//   this.cronominterval = setInterval(function () {
-//     this.timeCrono--;
-//   }.bind(this), 1000)
-// }
+CoreLogic.prototype.cronom = function () {
+  this.cronomInterval = setInterval(function () {
+    this.timeCrono--;
+  }.bind(this), 1000)
+}
 
-// CoreLogic.prototype.time = function () {
-//   setTimeout(function () {
-//     clearInterval(this.cronominterval)
-//     if (this.player.points > 15){
-//       alert("You win! :)");
-//     } else {
-//       alert("You loose! :(");
-//     }
-//   }.bind(this), 60000);
-// }
-
-
-// this.player.health--;
-
-
-
-// if (this.player.health === 0) {
-//   this.gameOver();
-// }
-
+CoreLogic.prototype.time = function () {
+  setTimeout(function () {
+    clearInterval(this.cronomInterval)
+    if (this.player.points > 20){
+      alert("You win! :)");
+    } else {
+      alert("You loose! :(");
+    }
+  }.bind(this), 60000);
+}

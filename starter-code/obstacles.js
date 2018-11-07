@@ -9,7 +9,6 @@ function Obstacles(game, img) {
 }
 
 Obstacles.prototype.draw = function() {
-  console.log("dentro");
   this.game.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
 }
 

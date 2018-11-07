@@ -87,6 +87,7 @@ Player.prototype.drawJump = function() {
 }
 
 Player.prototype.drawDown = function() {
+  this.y = 315;
   this.game.ctx.drawImage(
   this.imgDown,
   this.x,

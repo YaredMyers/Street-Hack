@@ -1,40 +1,43 @@
 var imgItems = {
   item1: {
     name: "item1",
-    width: 70,
-    height: 40,
-    y: 250,
+    w: 40,
+    h: 20,
+    y0: 310,
+    dx: 6,
     src:"./starter-code/images/items/sushi1.png"
   },
   sushiSp: {
     name: "sushiSp",
-    width: 140,
-    height: 100,
-    y: 205,
+    w: 40,
+    h: 20,
+    y0: 310,
+    dx: 6,
     src:"./starter-code/images/items/happysushi.png"
   },
   jumpingNinja: {
     name: "jumpingNinja",
-    width: 120,
-    height: 80,
-    y: 220,
+    w: 40,
+    h: 20,
+    y: 310,
+    dx: 6,
     src:"./starter-code/images/items/sushi3.png"
   },
 }
 
 var itsLoad = {};
 var itsCount = 0;
-var itsTotal = Object.keys(imgItems).length;
+var itsTotal = Object.keys(imgItems);
 
 Object.keys(imgItems).forEach(function(e) {
   var image = new Image();
 
-Object.keys(obj[e]).forEach(function(y){
+Object.keys(imgItems[e]).forEach(function(y){
   image[y] = imgItems[e][y];
   image.onload = function(){
     itsCount++;
 
-  if(itsCount === itsTotal) {
+  if(itsCount === itsTotal.length) {
     console.log(itsLoad);
   }
 }
