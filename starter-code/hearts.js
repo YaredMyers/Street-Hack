@@ -1,15 +1,14 @@
 function Hearts(game) {
   this.game = game;
-  this.x =
-  this.y = 
-  this.w = this.game.canvas.width;
-  this.h = this.game.canvas.height;
+  this.x = 650;
+  this.y = 0;
+  this.w = 50;
+  this.h = 50;
   this.imgHeart = new Image();
   this.imgHeart.src = "./starter-code/images/items/heart-transparent-video-game-6.png";
   this.lifePoints = 3;
 }
 
-// me dibuja los corazones
 Hearts.prototype.draw = function() {
   var x = 0;
   for (i = 0; i < this.lifePoints; i++) {
@@ -20,17 +19,14 @@ Hearts.prototype.draw = function() {
       this.w,
       this.h,
     );
-    x += this.x;
+    x += this.w;
   }
 }
 
-
-// cuando nos da la vida
 Hearts.prototype.addHearts = function() {
   this.lifePoints++;
 }
 
-// cuando nos quita la vida
 Hearts.prototype.removeHearts = function() {
   this.lifePoints--;
 } 
