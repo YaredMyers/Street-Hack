@@ -18,6 +18,8 @@ CoreLogic.prototype.reset = function() {
   this.items = [];
   this.timeCrono = 60;
   this.score = 0;
+  this.items.push(new Items(this, itsLoad["item1"]));
+
 }
 
 // CoreLogic.prototype.stop = function() {
@@ -34,6 +36,7 @@ CoreLogic.prototype.draw = function() {
     its.draw();
   });
   this.cronoDraw();
+  this.scoreDraw();
 }
 
 CoreLogic.prototype.moveAll = function() {
@@ -54,7 +57,7 @@ CoreLogic.prototype.init = function() {
 
   this.obsColision();
   if (this.framesCount % 70 === 0) {
-    this.generateObstacle();
+    // this.generateObstacle();
   }
   if(this.framesCount == 1000){
     this.framesCount = 0;
@@ -62,8 +65,8 @@ CoreLogic.prototype.init = function() {
   this.framesCount++;
 
   this.itsColision();
-  if(this.framesCount % 50 === 0) {
-    this.generateItem();
+  if(this.framesCount % 80 === 0) {
+    // this.generateItem();
   }
   }.bind(this), 1000/this.fps);
 
@@ -77,8 +80,9 @@ CoreLogic.prototype.generateObstacle = function() {
   this.obstacles.push(new Obstacles(this, obsLoad[obsTotal[Math.floor(Math.random() * obsCount)]])); };
 
 CoreLogic.prototype.generateItem = function() { //////ATENCION!!!!!
-  this.items.push(new Items(this, itsLoad[itsTotal[Math.floor(Math.random() * itsCount)]]));
-  
+  // this.items.push(new Items(this, itsLoad[itsTotal[Math.floor(Math.random() * itsCount)]]));
+  this.items.push(new Items(this, itsLoad["item1"]));
+
 };
 
 CoreLogic.prototype.clearObstacles = function() {
@@ -98,6 +102,7 @@ CoreLogic.prototype.obsColision = function() {
   if(this.player.x + this.player.width >= obs.x  && obs.x + obs.width >= this.player.x &&
     this.player.y + obs.height >= obs.y && obs.y + obs.height >= this.player.y && !this.player.inmortal) {
       this.player.lifePoints--;
+      
       this.player.inmortal = true;      
       setTimeout(function(){
         this.player.inmortal = false;
@@ -112,10 +117,14 @@ CoreLogic.prototype.obsColision = function() {
 
 CoreLogic.prototype.itsColision = function() {
   this.items.forEach(function(its) {
-    if(this.player.x + this.player.width >= its.x  && its.x + its.width >= this.player.x &&
-      this.player.y + its.height >= its.y && its.y + its.height >= this.player.y) {
+    console.log(its, this.player)
+    if(this.player.x + this.player.w <= its.x &&
+        its.x + its.w >= this.player.x && 
+        this.player.y + this.player.h >= its.y &&
+        its.y + its.h >= this.player.y) {
         this.score++;
-        console.log(true);
+        console.log(this.player.lifePoints);
+
      }
     }.bind(this))
 };
@@ -129,15 +138,21 @@ CoreLogic.prototype.itsColision = function() {
 
 
 CoreLogic.prototype.cronoDraw = function() {
-  this.ctx.font = "30px Sans Serif";
+  this.ctx.font = "30px Helvetica";
   this.ctx.fillStyle = "black";
-  this.ctx.fillText(this.crono, 290, 30)
+  this.ctx.fillText(this.crono, 290, 30);
 }
 
 CoreLogic.prototype.cronom = function () {
   this.cronomInterval = setInterval(function () {
     this.timeCrono--;
   }.bind(this), 1000)
+}
+
+CoreLogic.prototype.scoreDraw = function() {
+  this.ctx.font = "20px Helvetica";
+  this.ctx.fillstyle = "black";
+  this.ctx.fillText(this.score, 100, 30);
 }
 
 CoreLogic.prototype.time = function () {

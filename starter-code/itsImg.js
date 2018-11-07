@@ -5,7 +5,7 @@ var imgItems = {
     h: 40,
     y0: 340,
     dx: 6,
-    scorePoint: 1,
+    score: 1,
     src:"./starter-code/images/items/arroz.png"
   },
   sushiSp: {
@@ -14,16 +14,17 @@ var imgItems = {
     h: 45,
     y0: 250,
     dx: 5,
-    lifePoint: 1,
+    // lifePoint: 1,
+    score: 1,
     src:"./starter-code/images/items/happysushi.png"
   },
   item2: {
     name: "item2",
     w: 60,
     h: 30,
-    y: 210,
+    y0: 350,
     dx: 6,
-    scorePoint: 1,
+    score: 1,
     src:"./starter-code/images/items/food.png"
   },
 }
