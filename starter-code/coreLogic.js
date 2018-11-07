@@ -34,7 +34,7 @@ CoreLogic.prototype.draw = function() {
   this.items.forEach(function(its){
     its.draw();
   });
-  // this.cronoDraw();
+  this.cronoDraw();
   this.scoreDraw();
 }
 
@@ -139,31 +139,31 @@ CoreLogic.prototype.itsColision = function() {
 //     this.init();
 
 
-// CoreLogic.prototype.cronoDraw = function() {
-//   this.ctx.font = "30px ArcadeClassic";
-//   this.ctx.fillStyle = "black";
-//   this.ctx.fillText(this.timeCrono, 290, 30);
-// }
+CoreLogic.prototype.cronoDraw = function() {
+  this.ctx.font = "30px ArcadeClassic";
+  this.ctx.fillStyle = "black";
+  this.ctx.fillText(this.timeCrono, 340, 30);
+}
 
-// CoreLogic.prototype.cronom = function () {
-//   this.cronomInterval = setInterval(function () {
-//     this.timeCrono--;
+CoreLogic.prototype.cronom = function () {
+  this.cronomInterval = setInterval(function () {
+    this.timeCrono--;
     
-//   }.bind(this), 1000)
+  }.bind(this), 1000)
 
-//   this.cronomInterval2 = setTimeout(function()  {
-//     this.timeCrono = 0;
-//     clearInterval(this.cronomInterval);
+  this.cronomInterval2 = setTimeout(function()  {
+    this.timeCrono = 0;
+    clearInterval(this.cronomInterval);
   
-//     // clearInterval(this.intervalID);
+    // clearInterval(this.intervalID);
     
-//   }.bind(this), 60000);
-// }
+  }.bind(this), 60000);
+}
 
-CoreLogic.prototype.scoreDraw = function() {
+CoreLogic.prototype.scoreDraw = function(score) {
   this.ctx.font = "30px ArcadeClassic";
   this.ctx.fillstyle = "black";
-  this.ctx.fillText(this.score, 100, 30);
+  this.ctx.fillText(`Score:  ${(this.score)}`, 10, 30);  //`score ${(this.score)}, 100, 30`
 }
 
 CoreLogic.prototype.time = function () {
