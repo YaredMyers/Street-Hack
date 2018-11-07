@@ -19,7 +19,7 @@ function Player(game) {
   this.upheight = 150;
   this.vx = 1;
   this.vy = 1;
-  this.lifePoints = 3;
+  this.lifePoints = 5;
   this.run = true;
   this.jump = false;
   this.down = false;
@@ -37,16 +37,20 @@ Player.prototype.setListeners = function() {
       this.vy -= 10;
       this.run = false;
       this.jump = true;
+      var jumpMusic = new Audio("./starter-code/sound/salto.wav");
+      jumpMusic.play();
     } else if (event.keyCode === DOWN_KEY  && this.down == false && this.y == this.y0) {
       this.y = 300;
       this.vx += 10;
       this.run = false;
       this.down = true;
+      var downMusic = new Audio("./starter-code/sound/down.wav");
+      downMusic.play();
       setTimeout(function(){
         this.down = false;
         this.run = true;
         this.y = this.y0;
-      }.bind(this), 700);      
+      }.bind(this), 800);      
     }
   }.bind(this);
 }

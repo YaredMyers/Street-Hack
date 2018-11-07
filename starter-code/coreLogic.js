@@ -3,7 +3,7 @@ function CoreLogic() {
   this.canvas = document.getElementById("myCanvas");
   this.ctx = this.canvas.getContext("2d");
   this.fps = 60;
-  this.timeCrono = 60;
+  this.timeCrono = 5;
   this.background = new Background(this);
   this.player = new Player(this);
   this.hearts = new Hearts(this);
@@ -13,16 +13,14 @@ function CoreLogic() {
 }
 
 CoreLogic.prototype.reset = function() {
+  this.background = new Background(this);
+  this.player = new Player(this);
   this.framesCount = 0;
   this.obstacles = [];
   this.items = [];
   this.timeCrono = 60;
   this.score = 0;
 }
-
-// CoreLogic.prototype.stop = function() {
-//   clearInterval(this.intervalID);
-// }
 
 CoreLogic.prototype.draw = function() {
   this.background.draw();
@@ -51,9 +49,7 @@ CoreLogic.prototype.moveAll = function() {
 
 CoreLogic.prototype.init = function() {
   this.intervalID = setInterval(function (){
-  this.clearAll();
-  console.log(this.obstacles.length, this.items.length);
-  
+  this.clearAll();  
   this.moveAll();
   this.draw();
   this.obsColision();
@@ -68,6 +64,13 @@ CoreLogic.prototype.init = function() {
   this.itsColision();
   if(this.framesCount % 80 === 0) {
     this.generateItem();
+  }
+  if (timeCrono === 0) {
+    this.gameOver();
+    if(confirm("GAME OVER. Play again?")) {
+      this.reset();
+      this.init();
+    }
   }
   }.bind(this), 1000/this.fps);
   this.cronom();
@@ -107,7 +110,9 @@ CoreLogic.prototype.obsColision = function() {
   if(this.player.x + this.player.width >= obs.x  && obs.x + obs.width >= this.player.x &&
     this.player.y + obs.height >= obs.y && obs.y + obs.height >= this.player.y && !this.player.inmortal) {
       this.player.lifePoints--;      
-      this.player.inmortal = true;      
+      this.player.inmortal = true;
+      var beatMusic = new Audio("./starter-code/sound/beat.wav");
+      beatMusic.play();    
       setTimeout(function(){
         this.player.inmortal = false;
       }.bind(this), 600)
@@ -127,16 +132,24 @@ CoreLogic.prototype.itsColision = function() {
         its.y + its.height >= this.player.y) {
         this.score++;
         this.items.splice(i, 1);
+        var itemMusic = new Audio("./starter-code/sound/item.mp3");
+        itemMusic.play();
      }
     }.bind(this))
 };
 
-// CoreLogic.prototype.gameOver = function() {
-//   this.stop();
+CoreLogic.prototype.stop = function() {
+  clearInterval(this.intervalID);
+};
+
+CoreLogic.prototype.gameOver = function() {
+  this.stop();
   
-//   if(confirm("you have not arrived to deliver the DE :(")) {
-//     this.reset();
-//     this.init();
+  if(confirm("GAME OVER. Play again?")) {
+    this.reset();
+    this.init();
+  }
+};
 
 
 CoreLogic.prototype.cronoDraw = function() {
@@ -155,7 +168,6 @@ CoreLogic.prototype.cronom = function () {
     this.timeCrono = 0;
     clearInterval(this.cronomInterval);
   
-    // clearInterval(this.intervalID);
     
   }.bind(this), 60000);
 }
