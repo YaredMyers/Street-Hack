@@ -190,7 +190,7 @@ CoreLogic.prototype.cronoDraw = function() {
   this.ctx.strokeText(this.timeCrono, 330, 35);
 };
 
-//todo: plase add a ScoreManager class
+//todo: plase add a ScoreManager class //pendiente de mirar
 CoreLogic.prototype.scoreDraw = function(score) {
   this.ctx.font = "35px ArcadeClassic";
   this.ctx.fillstyle = "black";
