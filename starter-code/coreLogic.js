@@ -9,6 +9,8 @@ function CoreLogic() {
   this.hearts = new Hearts(this);
   this.score = 0;
   this.intervalID = null;
+  this.imgGameOver = new Image();
+  this.imgGameOver.src = "./starter-code/images/background/gameoverbg.png";
   this.reset();
 }
 
@@ -48,6 +50,7 @@ CoreLogic.prototype.moveAll = function() {
 }
 
 CoreLogic.prototype.init = function() {
+  console.log("pepe")
   this.intervalID = setInterval(function (){
   this.clearAll();  
   this.moveAll();
@@ -65,15 +68,18 @@ CoreLogic.prototype.init = function() {
   if(this.framesCount % 80 === 0) {
     this.generateItem();
   }
-  if (timeCrono === 0) {
+  if (this.timeCrono === 0) {
     this.gameOver();
-    if(confirm("GAME OVER. Play again?")) {
-      this.reset();
-      this.init();
-    }
+    // if(confirm("GAME OVER. Play again?")) {
+    //   this.reset();
+    //   this.init();
+    // }
   }
+  if(this.framesCount % 60 == 0) {
+    this.timeCrono--;
+  }
+
   }.bind(this), 1000/this.fps);
-  this.cronom();
   }
 
 CoreLogic.prototype.clear = function() {
@@ -112,13 +118,14 @@ CoreLogic.prototype.obsColision = function() {
       this.player.lifePoints--;      
       this.player.inmortal = true;
       var beatMusic = new Audio("./starter-code/sound/beat.wav");
-      beatMusic.play();    
+      // beatMusic.play();    
       setTimeout(function(){
         this.player.inmortal = false;
       }.bind(this), 600)
     }
     if (this.player.lifePoints === 0) {
-      // alert("luz! fuego! destruccion!");
+      // prompt("luz! fuego! destruccion!");
+      this.gameOver();
     }
 
   }.bind(this))
@@ -133,50 +140,43 @@ CoreLogic.prototype.itsColision = function() {
         this.score++;
         this.items.splice(i, 1);
         var itemMusic = new Audio("./starter-code/sound/item.mp3");
-        itemMusic.play();
+        // itemMusic.play();
      }
     }.bind(this))
 };
 
 CoreLogic.prototype.stop = function() {
   clearInterval(this.intervalID);
+  console.log("pepeStop")
 };
 
 CoreLogic.prototype.gameOver = function() {
   this.stop();
+  this.clear();
   
+  this.ctx.drawImage(this.imgGameOver, 0, 0, this.canvas.width, this.canvas.height);
   if(confirm("GAME OVER. Play again?")) {
     this.reset();
     this.init();
   }
 };
 
-
 CoreLogic.prototype.cronoDraw = function() {
-  this.ctx.font = "30px ArcadeClassic";
+  this.ctx.font = "35px ArcadeClassic";
   this.ctx.fillStyle = "black";
-  this.ctx.fillText(this.timeCrono, 340, 30);
-}
+  this.ctx.strokeStyle = "white";
+  this.ctx.fillText(this.timeCrono, 330, 35);
+  this.ctx.strokeText(this.timeCrono, 330, 35);
+};
 
-CoreLogic.prototype.cronom = function () {
-  this.cronomInterval = setInterval(function () {
-    this.timeCrono--;
-    
-  }.bind(this), 1000)
-
-  this.cronomInterval2 = setTimeout(function()  {
-    this.timeCrono = 0;
-    clearInterval(this.cronomInterval);
-  
-    
-  }.bind(this), 60000);
-}
 
 CoreLogic.prototype.scoreDraw = function(score) {
-  this.ctx.font = "30px ArcadeClassic";
+  this.ctx.font = "35px ArcadeClassic";
   this.ctx.fillstyle = "black";
-  this.ctx.fillText(`Score:  ${(this.score)}`, 10, 30);  //`score ${(this.score)}, 100, 30`
-}
+  this.ctx.strokeStyle = "white";
+  this.ctx.fillText(`Score:  ${(this.score)}`, 15, 35);
+  this.ctx.strokeText(`Score:  ${(this.score)}`, 15, 35); 
+};
 
 CoreLogic.prototype.time = function () {
   setTimeout(function () {
@@ -187,4 +187,4 @@ CoreLogic.prototype.time = function () {
       alert("You loose! :(");
     }
   }.bind(this), 60000);
-}
+};

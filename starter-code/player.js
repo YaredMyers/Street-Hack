@@ -9,6 +9,9 @@ function Player(game) {
   this.imgUp.src = "./starter-code/images/player/sakup.png";
   this.imgDown = new Image();
   this.imgDown.src = "./starter-code/images/player/sakdownalt.png";
+  this.jumpMusic = new Audio("./starter-code/sound/salto.wav");
+  this.downMusic = new Audio("./starter-code/sound/agacharse.wav");
+  this.hadoukenMusic = new Audio("./starter-code/sound/hadouken.mp3");
   this.framesX = 3;
   this.framesY = 2;
   this.frameIndexX = 0;
@@ -19,7 +22,7 @@ function Player(game) {
   this.upheight = 150;
   this.vx = 1;
   this.vy = 1;
-  this.lifePoints = 5;
+  this.lifePoints = 4;
   this.run = true;
   this.jump = false;
   this.down = false;
@@ -29,6 +32,9 @@ function Player(game) {
 
 var SPACE_KEY = 32;
 var DOWN_KEY = 40;
+var F_KEY = 70;
+var G_KEY = 71;
+var H_KEY = 72;
 
 Player.prototype.setListeners = function() {
   document.onkeydown = function(event) {
@@ -37,20 +43,24 @@ Player.prototype.setListeners = function() {
       this.vy -= 10;
       this.run = false;
       this.jump = true;
-      var jumpMusic = new Audio("./starter-code/sound/salto.wav");
-      jumpMusic.play();
+      // this.jumpMusic.play();
     } else if (event.keyCode === DOWN_KEY  && this.down == false && this.y == this.y0) {
       this.y = 300;
       this.vx += 10;
       this.run = false;
       this.down = true;
-      var downMusic = new Audio("./starter-code/sound/down.wav");
-      downMusic.play();
+      // this.downMusic.play();
       setTimeout(function(){
         this.down = false;
         this.run = true;
         this.y = this.y0;
       }.bind(this), 800);      
+    } else if (event.keyCode === F_KEY) {
+      alert("HADOUKEN!!!!!");
+    } else if (event.keyCode === G_KEY) {
+      this.hadoukenMusic.play();
+    } else if (event.keyCode === H_KEY) {
+      window.open("https://www.youtube.com/watch?v=Aho3ZE0YrbA");
     }
   }.bind(this);
 }
