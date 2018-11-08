@@ -4,6 +4,8 @@ function Player(game) {
   this.y0 = this.game.canvas.height * 0.6;
   this.y = this.y0;
   this.img = new Image();
+
+  //todo: consider using SoundManager class and the GameConfig idea
   this.img.src = "./starter-code/images/player/player1invert.png";
   this.imgUp = new Image();
   this.imgUp.src = "./starter-code/images/player/sakup.png";
@@ -30,6 +32,8 @@ function Player(game) {
   this.setListeners();
 }
 
+
+//todo: consider using a KeyboardCodes object
 var SPACE_KEY = 32;
 var DOWN_KEY = 40;
 var F_KEY = 70;
@@ -43,13 +47,13 @@ Player.prototype.setListeners = function() {
       this.vy -= 10;
       this.run = false;
       this.jump = true;
-      // this.jumpMusic.play();
+      this.jumpMusic.play();
     } else if (event.keyCode === DOWN_KEY  && this.down == false && this.y == this.y0) {
       this.y = 300;
       this.vx += 10;
       this.run = false;
       this.down = true;
-      // this.downMusic.play();
+      this.downMusic.play();
       setTimeout(function(){
         this.down = false;
         this.run = true;
@@ -73,7 +77,6 @@ Player.prototype.draw = function() {
   } else {
     this.drawRun();
   }
-  
   this.animateSak();
 }
 

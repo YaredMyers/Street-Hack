@@ -11,6 +11,11 @@ function CoreLogic() {
   this.intervalID = null;
   this.imgGameOver = new Image();
   this.imgGameOver.src = "./starter-code/images/background/gameoverbg.png";
+  this.imgWin = new Image();
+  this.imgWin.src = "./starter-code/images/background/winnerbg.png";
+  this.beatMusic = new Audio("./starter-code/sound/beat.wav");
+  this.gameOverMusic = new Audio("./starter-code/sound/gameover.wav")
+  this.winMusic = new Audio("./starter-code/sound/win.wav");
   this.reset();
 }
 
@@ -49,8 +54,11 @@ CoreLogic.prototype.moveAll = function() {
   })
 }
 
+//todo: consider using a config file replacing hardcoded values
+// let GameConfig = {
+//   framesCount: 80
+// }
 CoreLogic.prototype.init = function() {
-  console.log("pepe")
   this.intervalID = setInterval(function (){
   this.clearAll();  
   this.moveAll();
@@ -69,23 +77,19 @@ CoreLogic.prototype.init = function() {
     this.generateItem();
   }
   if (this.timeCrono === 0) {
-    this.gameOver();
-    // if(confirm("GAME OVER. Play again?")) {
-    //   this.reset();
-    //   this.init();
-    // }
+    this.youWin();
   }
   if(this.framesCount % 60 == 0) {
     this.timeCrono--;
   }
-
   }.bind(this), 1000/this.fps);
-  }
+};
 
 CoreLogic.prototype.clear = function() {
   this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 }; 
 
+//todo: consider unifying functions that are extremely similar like generateObstacle and generateItem
 CoreLogic.prototype.generateObstacle = function() {
   this.obstacles.push(new Obstacles(this, obsLoad[obsTotal[Math.floor(Math.random() * obsCount)]])); 
 };
@@ -99,6 +103,7 @@ CoreLogic.prototype.clearAll = function() {
   this.clearObstacles();
 };
 
+//todo: consider unifying functions that are extremely similar like clearObstacles and clearItems
 CoreLogic.prototype.clearObstacles = function() {
   this.obstacles = this.obstacles.filter(function(obstacle) {
     return obstacle.x + obstacle.width >= 0;
@@ -113,18 +118,22 @@ CoreLogic.prototype.clearItems = function() {
 
 CoreLogic.prototype.obsColision = function() {
   this.obstacles.forEach(function(obs) {
+    //todo: consider creating a CollisionChecker object
+    // CollisionChecker.checkCollisionType1()
   if(this.player.x + this.player.width >= obs.x  && obs.x + obs.width >= this.player.x &&
     this.player.y + obs.height >= obs.y && obs.y + obs.height >= this.player.y && !this.player.inmortal) {
+      console.log("ironhack")
       this.player.lifePoints--;      
       this.player.inmortal = true;
-      var beatMusic = new Audio("./starter-code/sound/beat.wav");
-      // beatMusic.play();    
+
+      //todo: consider using configs
+      //todo: consider creating a SoundManager class
+      this.beatMusic.play();    
       setTimeout(function(){
         this.player.inmortal = false;
       }.bind(this), 600)
     }
     if (this.player.lifePoints === 0) {
-      // prompt("luz! fuego! destruccion!");
       this.gameOver();
     }
 
@@ -140,27 +149,37 @@ CoreLogic.prototype.itsColision = function() {
         this.score++;
         this.items.splice(i, 1);
         var itemMusic = new Audio("./starter-code/sound/item.mp3");
-        // itemMusic.play();
+        itemMusic.play();
      }
     }.bind(this))
 };
 
 CoreLogic.prototype.stop = function() {
   clearInterval(this.intervalID);
-  console.log("pepeStop")
+};
+
+CoreLogic.prototype.youWin = function() {
+  this.stop();
+  this.clear();
+  this.winMusic.play();
+  this.ctx.drawImage(this.imgWin, 0, 0, this.canvas.width, this.canvas.height);
 };
 
 CoreLogic.prototype.gameOver = function() {
   this.stop();
   this.clear();
-  
+  this.gameOverMusic.play();
   this.ctx.drawImage(this.imgGameOver, 0, 0, this.canvas.width, this.canvas.height);
-  if(confirm("GAME OVER. Play again?")) {
-    this.reset();
-    this.init();
-  }
+  this.reset();
+  this.tryAgain = setTimeout(function() {
+    if(confirm("Game Over. Try again :)")) {
+      this.init();
+    }
+  }.bind(this), 1000)
+  
 };
 
+//todo: plase add a CronoManager class
 CoreLogic.prototype.cronoDraw = function() {
   this.ctx.font = "35px ArcadeClassic";
   this.ctx.fillStyle = "black";
@@ -169,22 +188,11 @@ CoreLogic.prototype.cronoDraw = function() {
   this.ctx.strokeText(this.timeCrono, 330, 35);
 };
 
-
+//todo: plase add a ScoreManager class
 CoreLogic.prototype.scoreDraw = function(score) {
   this.ctx.font = "35px ArcadeClassic";
   this.ctx.fillstyle = "black";
   this.ctx.strokeStyle = "white";
   this.ctx.fillText(`Score:  ${(this.score)}`, 15, 35);
   this.ctx.strokeText(`Score:  ${(this.score)}`, 15, 35); 
-};
-
-CoreLogic.prototype.time = function () {
-  setTimeout(function () {
-    clearInterval(this.cronomInterval)
-    if (this.player.points > 2000){
-      alert("You win! :)");
-    } else {
-      alert("You loose! :(");
-    }
-  }.bind(this), 60000);
 };

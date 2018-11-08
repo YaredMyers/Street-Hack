@@ -27,7 +27,7 @@ var imgObstacles = {
     name: "ninjaCat",
     w: 90,
     h: 50,
-    y0: 335,
+    y0: 335, //335
     dx: 7,
     src:"./starter-code/images/obstacles/ninjacat.png"
   },
@@ -48,7 +48,7 @@ var imgObstacles = {
     src:"./starter-code/images/obstacles/firefont.png"
   },
 }
-
+//todo: put all this code inside a method which lives in the Game object (suggestion: generateDataModel())
   var obsLoad = {};
   var obsCount = 0;
   var obsTotal = Object.keys(imgObstacles);

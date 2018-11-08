@@ -1,3 +1,4 @@
+//todo: consider using a GameConfig variables instead of hardcoded values
 function Hearts(game) {
   this.game = game;
   this.x = 650;

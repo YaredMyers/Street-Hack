@@ -1,3 +1,4 @@
+//todo: please consider not polluting the window object. consider refactoring this code into a Game object (namespace)
 var imgItems = {
   item1: {
     name: "item1",
@@ -29,6 +30,7 @@ var imgItems = {
   },
 }
 
+//todo: put all this code inside a method which lives in the Game object (suggestion: generateDataModel())
 var itsLoad = {};
 var itsCount = 0;
 var itsTotal = Object.keys(imgItems);
