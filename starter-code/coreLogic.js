@@ -59,6 +59,7 @@ CoreLogic.prototype.moveAll = function() {
 //   framesCount: 80
 // }
 CoreLogic.prototype.init = function() {
+
   this.intervalID = setInterval(function (){
   this.clearAll();  
   this.moveAll();
@@ -122,7 +123,6 @@ CoreLogic.prototype.obsColision = function() {
     // CollisionChecker.checkCollisionType1()
   if(this.player.x + this.player.width >= obs.x  && obs.x + obs.width >= this.player.x &&
     this.player.y + obs.height >= obs.y && obs.y + obs.height >= this.player.y && !this.player.inmortal) {
-      console.log("ironhack")
       this.player.lifePoints--;      
       this.player.inmortal = true;
 
@@ -163,6 +163,7 @@ CoreLogic.prototype.youWin = function() {
   this.clear();
   this.winMusic.play();
   this.ctx.drawImage(this.imgWin, 0, 0, this.canvas.width, this.canvas.height);
+  document.getElementById("playAgainBtn").style.visibility = "visible";
 };
 
 CoreLogic.prototype.gameOver = function() {
@@ -174,9 +175,10 @@ CoreLogic.prototype.gameOver = function() {
   this.tryAgain = setTimeout(function() {
     if(confirm("Game Over. Try again :)")) {
       this.init();
+    } else {
+    document.getElementById("playAgainBtn").style.visibility = "visible"; //pregunta de si poner tambien en init();
     }
   }.bind(this), 1000)
-  
 };
 
 //todo: plase add a CronoManager class

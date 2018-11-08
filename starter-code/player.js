@@ -4,8 +4,6 @@ function Player(game) {
   this.y0 = this.game.canvas.height * 0.6;
   this.y = this.y0;
   this.img = new Image();
-
-  //todo: consider using SoundManager class and the GameConfig idea
   this.img.src = "./starter-code/images/player/player1invert.png";
   this.imgUp = new Image();
   this.imgUp.src = "./starter-code/images/player/sakup.png";
@@ -30,8 +28,7 @@ function Player(game) {
   this.down = false;
   this.inmortal = false;
   this.setListeners();
-}
-
+};
 
 //todo: consider using a KeyboardCodes object
 var SPACE_KEY = 32;
@@ -67,7 +64,7 @@ Player.prototype.setListeners = function() {
       window.open("https://www.youtube.com/watch?v=Aho3ZE0YrbA");
     }
   }.bind(this);
-}
+};
 
 Player.prototype.draw = function() {
   if (this.down) {
@@ -78,7 +75,7 @@ Player.prototype.draw = function() {
     this.drawRun();
   }
   this.animateSak();
-}
+};
 
 Player.prototype.drawRun = function() {
   this.game.ctx.drawImage(
@@ -92,7 +89,7 @@ Player.prototype.drawRun = function() {
   this.width, 
   this.height,
   );
-}
+};
 
 Player.prototype.drawJump = function() {
   this.game.ctx.drawImage(
@@ -102,7 +99,7 @@ Player.prototype.drawJump = function() {
   75,
   100,
   );
-}
+};
 
 Player.prototype.drawDown = function() {
   this.y = 315;
@@ -113,7 +110,7 @@ Player.prototype.drawDown = function() {
   75,
   70,
   );
-}
+};
 
 Player.prototype.animateSak = function() {
   if (this.game.framesCount % 8 === 0) {
@@ -127,7 +124,7 @@ Player.prototype.animateSak = function() {
       }
     }
   }
-}
+};
 
 Player.prototype.move = function() {
   var gravity = 0.5;
@@ -141,4 +138,4 @@ Player.prototype.move = function() {
     this.vy += gravity;
     this.y += this.vy;
   }
-}
+};

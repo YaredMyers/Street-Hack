@@ -83,17 +83,16 @@ li b {
   color: lightpink;
 }
 
-.post {
+.playAgain {
   display: flex;
-  flex-direction: row-reverse;
-  margin: 0 aut0;
-  margin: 0 auto;
-  position: absolute;
-  right: 20px;
-  bottom: 250px;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  bottom: 125px;
+  left: -280px;
 }
 
-.post img {
-  width: 330px;
-  height: 350px;
+#playAgainBtn {
+  background-color: aliceblue;
+  visibility: hidden;
 }

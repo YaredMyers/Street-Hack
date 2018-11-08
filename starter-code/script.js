@@ -4,7 +4,7 @@ window.onload = function() {
   var bgm = new Audio("./starter-code/sound/maintheme.mp3");
   bgm.play();
     
-    startGame();
+  startGame();
   };
 
 var coreLogic = new CoreLogic();
