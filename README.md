@@ -3,7 +3,17 @@
 ### Ayuda a Sakura a llegar a tiempo a IronHack para entregar el DE!!
 #### Street Hack es un plataformas en el que debes aguantar sin perder todas las vidas mientras recoges objetos y esquivas obstáculos.
 
+## Características
+* Uso de HTML5, CSS, JavaScript
+* Uso de sprites
+* Sonidos añadidos
+* Favicon
+* Imágenes "End-Game" añadidas
 
+## Instrucciones
+- Usa "Bar Space" para saltar
+- Usa la flecha "down" para agacharte
+- Recoge toda la comida que puedas
 
 ## 1. Prueba el juego
 #### https://yaredmyers.github.io/Street-Hack/
